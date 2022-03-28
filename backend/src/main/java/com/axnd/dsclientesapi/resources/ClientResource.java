@@ -2,7 +2,7 @@ package com.axnd.dsclientesapi.resources;
 
 import java.util.List;
 
-import com.axnd.dsclientesapi.entities.Client;
+import com.axnd.dsclientesapi.dto.ClientDTO;
 import com.axnd.dsclientesapi.services.ClientService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +19,8 @@ public class ClientResource {
     private ClientService clientService;
 
     @GetMapping
-    public ResponseEntity<List<Client>> findAll() {
-        List<Client> list = clientService.findAll();
+    public ResponseEntity<List<ClientDTO>> findAll() {
+        List<ClientDTO> list = clientService.findAll();
         return ResponseEntity.ok().body(list);
     }
 
