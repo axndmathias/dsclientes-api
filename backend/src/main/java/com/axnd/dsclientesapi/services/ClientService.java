@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import com.axnd.dsclientesapi.dto.ClientDTO;
 import com.axnd.dsclientesapi.entities.Client;
 import com.axnd.dsclientesapi.repositories.ClientRepository;
+import com.axnd.dsclientesapi.services.exceptions.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +33,7 @@ public class ClientService {
     @Transactional(readOnly = true)
     public ClientDTO findById(Long id) {
         Optional<Client> obj = clientRepository.findById(id);
-        Client entity = obj.get();
+        Client entity = obj.orElseThrow(() -> new EntityNotFoundException("Entity not found"));
 
         return new ClientDTO(entity);
     }
