@@ -1,6 +1,7 @@
 package com.axnd.dsclientesapi.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.axnd.dsclientesapi.dto.ClientDTO;
@@ -26,5 +27,13 @@ public class ClientService {
                 .map(x -> new ClientDTO(x))
                 .collect(Collectors
                         .toList());
+    }
+
+    @Transactional(readOnly = true)
+    public ClientDTO findById(Long id) {
+        Optional<Client> obj = clientRepository.findById(id);
+        Client entity = obj.get();
+
+        return new ClientDTO(entity);
     }
 }
